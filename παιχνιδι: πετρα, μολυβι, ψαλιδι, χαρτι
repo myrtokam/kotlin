@@ -1,0 +1,41 @@
+import kotlin.random.Random
+
+fun main() {
+    val options = listOf("Rock", "Pencil", "Scissors", "Paper") // Επιλογές
+    println("Welcome to Rock-Pencil-Scissors-Paper game!")
+    println("Choose one of the options: Rock, Pencil, Scissors, Paper")
+
+    // Εισαγωγή του χρήστη
+    print("Your choice: ")
+    val userInput = readLine()?.capitalize() ?: "" // Χρησιμοποιούμε .capitalize() για σωστή μορφή
+
+    if (userInput !in options) {
+        println("Invalid choice! You must choose one of: $options")
+        return
+    }
+
+    // Επιλογή του υπολογιστή
+    val computerChoice = options.random()
+
+    println("Opponent's choice: $computerChoice")
+    println("Your choice: $userInput")
+
+    // Καθορισμός του νικητή
+    val result = determineWinner(userInput, computerChoice)
+    println(result)
+}
+
+fun determineWinner(player: String, computer: String): String {
+    return if (player == computer) {
+        "It's a tie!"
+    } else if (
+        (player == "Rock" && (computer == "Scissors" || computer == "Pencil")) ||
+        (player == "Pencil" && computer == "Paper") ||
+        (player == "Scissors" && computer == "Paper") ||
+        (player == "Paper" && computer == "Rock")
+    ) {
+        "You win!"
+    } else {
+        "You lose!"
+    }
+}
